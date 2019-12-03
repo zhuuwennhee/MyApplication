@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Confirm Registration</title>
+        <th:block th:insert="~{/fragment/head.html::head}"></th:block>
+    </head>
+
+    <body>
+
+        <th:block th:replace="/fragment/header.html"></th:block>
+
+        <th:block th:replace="/fragment/navigator.html"></th:block>
+
+        <div class="container mt-5 mb-5">
+            <div class="row" th:with="status = ${#request.getParameter('status')}">
+                <div class="col-md-12">
+                    <div class="mt-5 text-center">
+                        <h1 class="text-primary" th:if="${status.equals('SUCCESS')}"><i class="fa fa-check-circle"></i>&nbsp;Wow! Action completed success!</h1>
+                        <h1 class="text-danger" th:if="${status.equals('ERROR') or status.equals('ENABLED')}"><i class="fa fa-warning"></i>&nbsp;Oops! Sorry...</h1>
+                        <h2 class="text-success" th:if="${status.equals('SUCCESS')}">Account activation success!</h2>
+                        <h2 class="text-warning" th:if="${status.equals('ERROR') or status.equals('ENABLED')}">Account activation failed!</h2>
+                        <div class="text-center" th:if="${status.equals('ERROR')}">
+                            <p>Sorry, Your account has expired activation or an error occurred during account activation!</p>
+                            <p><button class="btn btn-md btn-primary" data-toggle="modal" data-target="#resend-confirmation-token-modal">Tap Me</button>&nbsp;to receive another email to activate your account</p>
+                            <p>Or contact the administrator for support</p>
+                        </div>
+                        <div class="text-center" th:if="${status.equals('ENABLED')}">
+                            <p>Your account has been activated, no need to reactivate!</p>
+                        </div>
+                        <div th:if="${status.equals('ERROR')}" class="container m-5">
+                            <th:block th:replace="/fragment/support.html"></th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:replace="/fragment/footer.html"></th:block>
+
+    </body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+    <head>
+        <title>Error 403</title>
+        <th:block th:insert="~{/fragment/head.html::head}"></th:block>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 ml-5 text-center">
+                        <h1 class="text-danger"><i class="fa fa-warning"></i>&nbsp;Oops! Sorry...</h1>
+                        <h2 class="text-warning">Oops! 403 Forbidden</h2>
+                        <div>
+                            <p>Sorry, your access is refused due to security reasons of our server and also our sensitive data!</p>
+                            <p>Please go back to the previous page to continue browsing...</p>
+                        </div>
+                        <th:block th:replace="/fragment/support.html"></th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

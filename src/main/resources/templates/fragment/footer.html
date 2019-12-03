@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <footer class="footer" th:with="appInfo = ${session.APP_INFO}">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 footer-geo">
+                    <h3>Location</h3>
+                    <address>
+                        <a class="fa fa-map-marker">&nbsp;Address: <span th:text="${appInfo.getLocation()}"/></a>
+                        <br>
+                        <a class="fa fa-phone">&nbsp;Phone: <span th:text="${appInfo.getPhoneNumber()}"/></a>
+                    </address>
+                </div>
+                <div class="col-sm-4 footer-social text-center">
+                    <h3>Social contact</h3>
+                    <ul class="footer-nav">
+                        <li>
+                            <a th:href="${appInfo.getFacebook().contains('http')}? ${appInfo.getFacebook()} : 'https://facebook.com/' + ${appInfo.getFacebook()}" target="_blank"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a th:href="'skype:' + ${appInfo.getSkype()} + '?chat'" target="_blank"><i class="fa fa-skype"></i></a>
+                        </li>
+                        <li>
+                            <a th:href="'mailto:' + ${appInfo.getEmailAddress()}" target="_blank"><i class="fa fa-envelope"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 footer-info">
+                    <h3>Information</h3>
+                    <address>
+                        <a class="fa fa-user">&nbsp;Development by: <span class="fa fa-copyright" th:text="${appInfo.getDeveloper()}"/></a>
+                        <br>
+                        <a class="fa fa-phone">&nbsp;Phone: <span th:text="${appInfo.getPhoneNumber()}"/></a>
+                        <br>
+                        <a class="fa fa-envelope">&nbsp;Mail: <span th:text="${appInfo.getEmailAddress()}"/></a>
+                    </address>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3 footer-p">
+            <span class="fa fa-copyright">&nbsp; <span th:text="${appInfo.getCopyright()}" /> </span>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+</html>

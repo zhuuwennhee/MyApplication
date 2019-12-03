@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+        <h1>Confirm your account</h1>
+
+        <p th:text="'Hi, ' + ${firstName} + ' ' + ${lastName}"></p>
+
+        <p>Thank you registered localhost account!</p>
+
+        <p>Please<a style="color: red; font-size: 15px;" th:href="@{http://localhost:8080/ConfirmRegistrationAction/${appUserToken}}">&nbsp;Click Me&nbsp;</a>to confirm your account</p>
+
+        <p>If that doesn't work, copy and paste the following link in your browser:</p>
+
+        <p><th:block th:text="${confirmRegistrationURL}"/> </p>
+
+        <p>If you didn't create an account with this email, you can safely delete this email</p>
+
+        <p>This email is valid for 7 days</p>
+
+        <p>This email not valid after <span style="color: red; font-size: 15px; font-style: italic;" th:text="${expirationDate}"/> </p>
+
+        <p style="color: red; font-size: 20px; font-style: italic;">Best & Regard!</p>
+
+    </body>
+
+</html>

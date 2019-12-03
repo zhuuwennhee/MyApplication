@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+    <head>
+        <title>Error 404</title>
+        <th:block th:insert="~{/fragment/head.html::head}"></th:block>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 ml-5 text-center">
+                        <h1 class="text-danger"><i class="fa fa-warning"></i>&nbsp;Oops! Sorry...</h1>
+                        <h2 class="text-warning">Oops! 404 Not Found</h2>
+                        <div>
+                            <p>Sorry, an error has occurred, Requested page not found!</p>
+                            <p>Unfortunately the page you were looking for could not be found.</p>
+                            <p>It may be temporarily unavailable, moved or no longer exist.</p>
+                            <p>Check the URL you entered for any mistakes and try again.</p>
+                        </div>
+                        <th:block th:replace="/fragment/support.html"></th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

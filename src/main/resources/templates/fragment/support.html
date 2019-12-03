@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <div class="m-5 text-center" th:with="appInfo = ${session.APP_INFO}">
+        <a th:href="@{/index.html}" class="btn btn-success btn-md mr-auto">
+            <span class="fa fa-home"></span>
+            Return Home
+        </a>
+        <a th:href="'mailto:' + ${appInfo.getEmailAddress()}" target="_blank" class="btn btn-danger btn-md mr-auto">
+            <span class="fa fa-envelope"></span>
+            Email Support
+        </a>
+        <a th:href="${appInfo.getFacebook()}" target="_blank" class="btn btn-primary btn-md mr-auto">
+            <span class="fa fa-facebook"></span>
+            Facebook Support
+        </a>
+    </div>
+
+</html>

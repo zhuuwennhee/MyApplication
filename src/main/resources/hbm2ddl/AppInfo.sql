@@ -1,0 +1,2 @@
+USE Beginner;
+INSERT INTO DBO.APP_INFO(APP_NAV_BRAND, COPYRIGHT, DEVELOPER, LOCATION, PHONE_NUMBER, EMAIL_ADDRESS, FACEBOOK, SKYPE) VALUES (N'朱 文 河', N'朱 文 河', N'Chu Văn Hà', N'Vũng Áng, Kỳ Lợi, Kỳ Anh, Hà Tĩnh', '0979 045 907', 'thieuniencahanh@gmail.com', 'https://facebook.com/zhuwenhe', null);

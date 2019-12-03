@@ -1,0 +1,56 @@
+<!-- MODAL START -->
+<div class="modal fade" id="send_email_unlock_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-label">Send Unlock Account Email</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container">
+                    <form id="send_email_unlock_form">
+                        <div class="form-group row">
+                            <label id="seu_not_found" class="col-sm-12 col-form-label fa fa-exclamation-triangle text-danger hide">&nbsp;Not found email address with your username input, please try again!</label>
+                        </div>
+                        <div class="form-group required row">
+                            <label class="col-sm-3 col-form-label" for="seu_app_username">Username:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="seu_app_username" name="seu_app_username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label" for="seu_email_address">Email address:</label>
+                            <div class="col-sm-9">
+                                <label class="col-form-label" id="seu_email_address"></label>
+                            </div>
+                        </div>
+                        <div class="form-group required row">
+                            <label class="col-sm-3 col-form-label" for="seu_confirm_email_address">Confirm Email Address:</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="seu_confirm_email_address" name="seu_confirm_email_address" placeholder="Email Address">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 offset-sm-3">
+                                <button type="submit" class="btn btn-primary" id="seu_submit">Submit</button>
+                                <button type="reset" class="btn btn-secondary" id="seu_reset">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- MODAL END -->

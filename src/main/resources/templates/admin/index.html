@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Index</title>
+        <th:block th:insert="~{/fragment/head.html::head}"></th:block>
+    </head>
+
+    <body>
+
+        <th:block th:replace="/fragment/header.html"></th:block>
+
+        <th:block th:replace="/fragment/navigator.html"></th:block>
+
+        <th:block th:replace="/fragment/content.html"></th:block>
+
+        <th:block th:replace="/fragment/footer.html"></th:block>
+
+    </body>
+
+</html>

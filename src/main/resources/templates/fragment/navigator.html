@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <!-- NAV MENU START -->
+    <div class="container-fluid navbar navbar-expand-lg"  data-toggle="sticky-onscroll" th:with="appInfo = ${session.APP_INFO}" >
+
+        <nav class="container">
+
+            <!-- BRAND -->
+            <a class="navbar-brand text-light" th:href="@{/}"><p th:text="${appInfo.getAppNavBrand()}"/></a>
+
+            <!-- TOGGLE/COLLAPSIBLE BUTTON -->
+            <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="fa fa-bars"></span>
+            </button>
+
+            <!-- NAVBAR LINK -->
+            <ul class="collapse navbar-collapse mt-auto mb-auto" id="collapsibleNavbar">
+
+                <!-- LINKS -->
+                <ul class="navbar-nav">
+                    <th:block th:each="appMenu : ${session.APP_MENU_LIST}">
+                        <li class="nav-item" th:with="appSubMenuSet = ${appMenu.getAppSubMenuSet()}" th:classappend="${#sets.isEmpty(appSubMenuSet)}? '' : 'dropdown'">
+                            <a class="nav-link text-light" th:href="${appMenu.getPageURL()}" th:if="${#sets.isEmpty(appSubMenuSet)}">
+                                <i th:classappend="${appMenu.getFontAwesomeIcon()}"></i>
+                                &nbsp;<span th:text="${appMenu.getAppMenuName()}"/>
+                            </a>
+                            <a class="nav-link text-light dropdown-toggle" data-toggle="dropdown" th:if="${not #sets.isEmpty(appSubMenuSet)}">
+                                <i th:classappend="${appMenu.getFontAwesomeIcon()}"></i>
+                                &nbsp;<span th:text="${appMenu.getAppMenuName()}"/>
+                            </a>
+                            <ul class="dropdown-menu" th:if="${not #sets.isEmpty(appSubMenuSet)}">
+                                <th:block th:each="appSubMenu, iter : ${appSubMenuSet}">
+                                    <li>
+                                        <a class="dropdown-item text-primary" th:classappend="${iter.first? '' : 'mt-2'}" th:href="${appSubMenu.getPageURL()}">
+                                            <i th:class="${appSubMenu.getFontAwesomeIcon()}"></i>
+                                            &nbsp;<span th:text="${appSubMenu.getAppSubMenuName()}"/>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider" th:if="${not iter.last}"></li>
+                                </th:block>
+                            </ul>
+                        </li>
+                    </th:block>
+                </ul>
+
+                <!-- SIGN-IN, REGISTER, SIGN-OUT -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" th:if="${session.SIGN_INNED_USER == null}">
+<!--                        <a class="nav-link text-light" th:href="@{/login.html}"><i class=" fa fa-sign-in"></i>&nbsp;Sign-in</a>-->
+                        <a class="nav-link text-light" data-toggle="modal" data-target="#sign_in_account_modal"><i class=" fa fa-sign-in"></i>&nbsp;Sign-in</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.SIGN_INNED_USER == null}">
+                        <a class="nav-link text-light" data-toggle="modal" data-target="#register_account_modal"><i class=" fa fa-registered"></i>&nbsp;Register</a>
+                    </li>
+                    <li class="nav-item dropdown" th:if="${session.SIGN_INNED_USER != null}">
+                        <a class="nav-link text-light dropdown-toggle caret" data-toggle="dropdown">
+                            <span class="welcome-user">Hi,&nbsp;</span>
+                            <span class="text-warning" th:text="${session.SIGN_INNED_USER.getAppUserProfile() != null? session.SIGN_INNED_USER.getAppUserProfile().getLastName() : session.SIGN_INNED_USER.getAppUsername()}"/>
+                            <img th:if="${session.SIGN_INNED_USER.getAppUserProfile() == null || session.SIGN_INNED_USER.getAppUserProfile().getAvatar() == null}" th:src="@{/images/default-avatar.png}" class="avatar-navbar rounded-circle">
+                            <img th:if="${session.SIGN_INNED_USER.getAppUserProfile() != null && session.SIGN_INNED_USER.getAppUserProfile().getAvatar() != null}" th:src="@{${session.SIGN_INNED_USER.getAppUserProfile().getAvatar()}}" class="avatar-navbar rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu" th:if="${session.SIGN_INNED_USER != null}">
+                            <li><a class="dropdown-item text-primary" th:href="@{/profile.html}"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a class="dropdown-item text-primary mt-2" th:href="@{/change-password.html}"><i class="fa fa-cog"></i>&nbsp;Change password</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a class="dropdown-item text-primary">
+                                    <form class="form-inline" th:action="@{/logout}" method="post">
+                                        <button type="submit" class="text-primary btn btn-link btn-logout"><i class=" fa fa-sign-out"></i>&nbsp;Sign-out</button>
+                                    </form>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!-- NAV MENU END -->
+
+    <!--    MODAL SIGN-IN ACCOUNT -->
+    <th:block th:replace="/admin/sign-in-account.html"></th:block>
+
+    <!--    MODAL RESEND CONFIRMATION TOKEN -->
+    <th:block th:replace="/user/resend-confirmation-token.html"></th:block>
+
+    <!--    MODAL SEND EMAIL UNLOCK ACCOUNT -->
+    <th:block th:replace="/user/send-email-unlock.html"></th:block>
+
+    <!--    MODAL REGISTER ACCOUNT -->
+    <th:block th:replace="/user/register-account.html"></th:block>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Unlock App User</title>
+        <th:block th:insert="~{/fragment/head.html::head}"></th:block>
+    </head>
+
+    <body>
+
+        <th:block th:replace="/fragment/header.html"></th:block>
+
+        <th:block th:replace="/fragment/navigator.html"></th:block>
+
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-12" th:with="status = ${#request.getAttribute('UNLOCK_APP_USER_STATUS')}">
+                    <div class="mt-5 text-center">
+                        <h1 class="text-primary" th:if="${status eq 'SUCCESS'}"><i class="fa fa-check-circle"></i>&nbsp;Wow! Action completed success!</h1>
+                        <h1 class="text-danger" th:if="${status eq 'ERROR' or status eq 'ENABLED'}"><i class="fa fa-warning"></i>&nbsp;Oops! Sorry...</h1>
+                        <h2 class="text-success" th:if="${status eq 'SUCCESS'}">App user unlock success!</h2>
+                        <h2 class="text-warning" th:if="${status eq 'ERROR' or status eq 'ENABLED'}">App user unlock failed!</h2>
+                        <div class="text-center" th:if="${status eq 'ERROR'}">
+                            <p>Sorry, Your app user has expired unlock or an error occurred during app user unlock!</p>
+                            <p><a class="text-success" data-toggle="modal" data-target="#unlock_app_user_modal">Click me</a>&nbsp;to receive another email to unlock your app user</p>
+                            <p>Or contact the administrator for support</p>
+                        </div>
+                        <div class="text-center" th:if="${status eq 'ENABLED'}">
+                            <p>Your app user has been unlocked, no need to reactivate!</p>
+                        </div>
+                        <div th:if="${status eq 'ERROR'}" class="container m-5">
+                            <th:block th:replace="/fragment/support.html"></th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:replace="/fragment/footer.html"></th:block>
+
+    </body>
+
+</html>

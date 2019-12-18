@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Sign-in</title>
+        <th:block th:insert="~{/fragment/head.html::head}"></th:block>
+    </head>
+
+    <body>
+
+        <th:block th:replace="/fragment/header.html"></th:block>
+
+        <th:block th:replace="/fragment/navigator.html"></th:block>
+
+        <div class="container">
+            <div class="mt-5 mb-5 p-5">
+                <form id="login_form" th:action="@{/j_spring_security_check}" method="post">
+                    <fieldset class="col-sm-9 mx-auto" th:with="error = ${#request.getParameter('ERROR')}">
+                        <div class="form-group row offset-sm-2" th:if="${error eq 'INCORRECT'}">
+                            <p class="text-danger"><i class=" fa fa-exclamation-triangle"></i>&nbsp;Username or Password is incorrect, please try again!</p>
+                        </div>
+                        <div class="form-group row offset-sm-2" th:if="${error eq 'DISABLED'}">
+                            <p class="text-danger"><i class=" fa fa-exclamation-triangle"></i>&nbsp;Your app user has not been activated, please check your email address confirm registration or <a class="text-success" data-toggle='modal' data-target='#resend_confirmation_token_modal'>Click me</a> to receive confirm registration email!</p>
+                        </div>
+                        <div class="form-group row offset-sm-2" th:if="${error eq 'LOCKED'}">
+                            <p class="text-danger"><i class=" fa fa-exclamation-triangle"></i>&nbsp;Your app user is locked, <a class="text-success" data-toggle='modal' data-target='#send_email_unlock_modal'>Click me</a> to unlock your app user!</p>
+                        </div>
+                        <div class="form-group required row">
+                            <label for="j_username" class="col-sm-2 col-form-label">Username:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="j_username" name="j_username" placeholder="Username" required>
+                            </div>
+                        </div>
+                        <div class="form-group required row">
+                            <label for="j_password" class="col-sm-2 col-form-label">Password:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="j_password" name="j_password" placeholder="Password" autocomplete="new-password" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 offset-sm-2">
+                                <label class="form-check-label"><input type="checkbox" id="remember-me" name="remember-me">&nbsp;Remember me</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 offset-sm-2">
+                                <a th:href="@{/user/forgot-password.html}" tabindex="5" class="text-danger">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 offset-sm-2">
+                                <button type="submit" class="btn btn-primary" id="login_submit"><i id="login_spinner" class="fa fa-sign-in"></i>&nbsp;Sign-in</button>
+                                <button type="reset" class="btn btn-secondary" id="login_reset"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <th:block th:replace="/fragment/footer.html"></th:block>
+
+    </body>
+
+</html>

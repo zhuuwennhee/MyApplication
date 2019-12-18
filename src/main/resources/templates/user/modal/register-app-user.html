@@ -1,0 +1,122 @@
+<!-- MODAL -->
+<div class="modal fade" id="register_app_user_modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header">
+                <h1 class="modal-title" id="modal-label">Register App User</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- MODAL BODY -->
+            <div class="modal-body">
+                <div class="container">
+                    <form id="register_app_user_form">
+                        <div class="form-group required row">
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_app_username">Username:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="rau_app_username" name="rau_app_username" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_email_address">Email Address:</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="rau_email_address" name="rau_email_address" placeholder="Email Address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group required row">
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_password">Password:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="rau_password" name="rau_password" placeholder="Password" autocomplete="new-password">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_confirm_password">Confirm Password:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="rau_confirm_password" name="rau_confirm_password" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group required row">
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_first_name">First Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="rau_first_name" name="rau_first_name" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_last_name">Last Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="rau_last_name" name="rau_last_name" placeholder="Last Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group required row">
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label">Gender:</label>
+                                <div class="col-sm-9">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input checked="checked" type="radio" class="custom-control-input" id="male" name="rau_gender" value="true">
+                                        <label class="custom-control-label" for="male">Male</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="female" name="rau_gender" value="false">
+                                        <label class="custom-control-label" for="female">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_date_of_birth">Date of Birth:</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" id="rau_date_of_birth" name="rau_date_of_birth" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group required row">
+                            <div class="col-sm-6 row">
+                                <label class="col-sm-3 col-form-label" for="rau_phone_number">Phone Number:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="rau_phone_number" name="rau_phone_number" placeholder="Phone Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label" style="max-width:12.499999995%; flex-basis:12.499999995%;" for="rau_address">Address:</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" class="form-control" id="rau_address" name="rau_address" placeholder="Address"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class="form-check-label">
+                                    <input type="checkbox" id="rau_read_and_agree" name="rau_read_and_agree">
+                                    <label for="rau_read_and_agree" class="col-form-label">&nbsp;I have read understand and agree to the terms of service</label>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary disabled" id="rau_submit" disabled><i id="rau_spinner" class="fa fa-registered"></i>&nbsp;Registration</button>
+                                <button type="reset" class="btn btn-secondary" id="rau_reset"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL FOOTER -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Close</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>

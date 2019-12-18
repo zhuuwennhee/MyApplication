@@ -8,8 +8,21 @@ $(document).ready(function () {
     /** RESET FORM **/
     function resetForm() {
         $("#resend_confirmation_token_form").validate().resetForm();
+        $("#rct_email_address").empty();
+        not_found_hide();
+    }
+
+
+    /** HIDE MESSAGE NOT FOUND USERNAME **/
+    function not_found_hide() {
         $("#rct_not_found").addClass("hide");
         $("#rct_not_found").removeClass("show");
+    }
+
+    /** SHOW MESSAGE NOT FOUND USERNAME **/
+    function not_found_show() {
+        $("#rct_not_found").addClass("show");
+        $("#rct_not_found").removeClass("hide");
     }
 
     /** CLICK BUTTON RESET **/
@@ -21,7 +34,7 @@ $(document).ready(function () {
      *  USERNAME BLUR EVENT
      *  FIND EMAIL BY USERNAME
      */
-    var emailAddress = null;
+    var emailAddress = "";
     $("#rct_app_username").blur(function () {
         var appUsername = $("#rct_app_username").val();
         if(appUsername != null && (appUsername = appUsername.trim()) != "") {
@@ -38,16 +51,14 @@ $(document).ready(function () {
                     async: false
                 });
                 ajax_exists.done(function (data) {
+                    emailAddress = data;
                     if (data != null && data != "") {
                         $("#rct_email_address").text(data.substring(0, 4) + "##########" + data.substring(data.length - 6, data.length));
-                        $("#rct_not_found").addClass("hide");
-                        $("#rct_not_found").removeClass("show");
-                        emailAddress = data;
+                        not_found_hide();
                     }
                     else {
                         $("#rct_email_address").empty();
-                        $("#rct_not_found").addClass("show");
-                        $("#rct_not_found").removeClass("hide");
+                        not_found_show();
                     }
                 });
             }
@@ -55,9 +66,27 @@ $(document).ready(function () {
     });
 
     /** VALIDATE EMAIL CONFIRM SAME EMAIL METHOD **/
-    $.validator.addMethod("confirm_email_address", function (confirmEmailAddress, element) {
-        return this.optional(element) || (confirmEmailAddress != null && confirmEmailAddress.trim() == emailAddress);
+    $.validator.addMethod("rct_email_address_match", function (confirmEmailAddress, element) {
+        return this.optional(element) || (confirmEmailAddress != null && confirmEmailAddress === emailAddress);
     });
+
+    /** LOADING **/
+    function loading() {
+        /** LOADING SPINNER **/
+        $("#rct_spinner").removeClass("fa fa-paper-plane");
+        $("#rct_spinner").addClass("fa fa-spinner fa-spin");
+        $("#rct_submit").prop("disabled", true);
+        $("#rct_reset").prop("disabled", true);
+    }
+
+    /** UNLOADING **/
+    function unloading() {
+        /** LOADING SPINNER **/
+        $("#rct_spinner").removeClass("fa fa-spinner fa-spin");
+        $("#rct_spinner").addClass("fa fa-paper-plane");
+        $("#rct_submit").prop("disabled", false);
+        $("#rct_reset").prop("disabled", false);
+    }
 
     /** VALIDATE REGISTER FORM **/
     $("#resend_confirmation_token_form").validate({
@@ -73,7 +102,7 @@ $(document).ready(function () {
             rct_confirm_email_address: {
                 required: true,
                 email: true,
-                confirm_email_address: true
+                rct_email_address_match: true
             }
         },
         /** MESSAGE **/
@@ -86,15 +115,17 @@ $(document).ready(function () {
             },
             /** MESSAGE VALIDATE EMAIL ADDRESS **/
             rct_confirm_email_address: {
-                required: "Email is required!",
+                required: "Email address is required!",
                 email: "Please enter a valid email address!",
-                confirm_email_address: "The email you entered is not the email you registered!"
+                rct_email_address_match: "The email you entered is not the email you registered!"
             }
         },
         /**
          *  SUBMIT FORM
          */
         submitHandler: function (form) {
+            /** LOADING SPINNER **/
+            loading();
             /**
              *  GET FORM VALUE
              */
@@ -119,6 +150,8 @@ $(document).ready(function () {
             });
             /** AJAX CALL SUCCESS **/
             ajax_update.done(function (data) {
+                /** UNLOADING SPINNER **/
+                unloading();
                 data? alertSuccess() : alertError();
             });
         }
@@ -145,7 +178,7 @@ $(document).ready(function () {
                 /** RESET FORM RESEND EMAIL CONFIRMATION TOKEN VALUE **/
                 resetForm();
                 /** OPEN MODAL SIGN-IN ACCOUNT **/
-                $("#sign_in_account_modal").modal("show");
+                $("#sign_in_app_user_modal").modal("show");
             }
         });
     }

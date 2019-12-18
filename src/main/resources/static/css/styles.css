@@ -5,6 +5,9 @@ html, body {
     width: 100%;
     height: auto;
 }
+a {
+    cursor: pointer;
+}
 .no-under-line {
     text-decoration: none !important
 }
